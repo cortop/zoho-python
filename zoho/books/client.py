@@ -38,6 +38,8 @@ class Client(CommonClient):
         base_params = {'organization_id': self._organization_id} if self._organization_id is not None else {}
 
         response = self._get(url, params=base_params)
+        if response is None:
+            return []
         all_data = response[module_conf['list_name']]
         while response.get('page_context', {}).get('has_more_page'):
             page = response['page_context']['page']
